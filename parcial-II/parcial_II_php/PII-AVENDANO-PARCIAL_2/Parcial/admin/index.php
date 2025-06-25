@@ -1,3 +1,25 @@
+<?php
+    require_once("../classes/Conexion.php");
+    require_once("includes/functions.php");
+    require_once("../functions/autoload.php");
+    
+    $validSectionsAdmin = ["inicio", "productos", "marcas", "usuarios", "niveles", "provincias",
+     "crear_marca", "editar_marca", "borrar_marca", "borrar_marca_acc", 
+     "crear_producto", "editar_producto", "borrar_producto", "borrar_producto_acc", 
+     "login", "logout" ];
+     
+    $seccion = isset($_GET['sec']) ? $_GET['sec'] : 'inicio';
+    
+    if(!in_array($seccion, $validSectionsAdmin)){
+        $vista = '404';
+        $title_seccion = "Error 404 - Página no encontrada";
+
+    }else{
+        $vista = $seccion;
+        $title_seccion = ucfirst(strtolower($seccion)) . " - Portal de Administración";
+    }
+
+    ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
