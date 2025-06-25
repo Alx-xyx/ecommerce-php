@@ -1,0 +1,75 @@
+/** Modificaciones de elementos de bootstrap */
+
+html, body{
+    font-family: "Montserrat", sans-serif !important;
+}
+
+.carousel-item img{
+    filter: brightness(60%) !important;
+    transition: opacity 0.3s ease;
+}
+
+/* Estilos para la vista Home */
+
+/* Estilos para la vista Products */
+.width24{
+    width: 24rem;
+}
+
+.sectionProducts{
+    margin: 1em;
+}
+
+/* Estilos para la vista 404 */
+
+.main404{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin-top: 5em;
+}
+
+/* Estilos para la vista Contact */
+
+.card-img-top{
+    max-width: 250px;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+}
+
+.width250{
+    width: 250px;
+}
+
+.boldTitle{
+    font-weight: 800;
+}
+
+/* Estilos para la vista Us */
+.margin-12em{
+    margin: 12em;
+}
+
+.usTitles{
+    font-weight: 800;
+    font-size: xxx-large;
+}
+
+.usTexts{
+    font-size: larger;
+}
+
+/* Estilos para la vista Enviado */
+
+.sended{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin-top: 5em;
+}
