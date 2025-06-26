@@ -6,22 +6,22 @@
         "showUser": true
     },
     {
-        "vinculo": "products",
-        "texto": "products",
-        "title": "Products",
-        "showUser": true
+        "vinculo": "productos",
+        "texto": "productos",
+        "title": "Administracion de Productos",
+        "showUser": false
     },
     {
-        "vinculo": "contact",
-        "texto": "contact",
-        "title": "Contact",
-        "showUser": true
+        "vinculo": "marcas",
+        "texto": "marcas",
+        "title": "Marcas",
+        "showUser": false
     },
     {
-        "vinculo": "us",
-        "texto": "us",
-        "title": "Us",
-        "showUser": true
+        "vinculo": "tipos",
+        "texto": "tipos",
+        "title": "Tipos",
+        "showUser": false
     },
     {
         "vinculo": "product",

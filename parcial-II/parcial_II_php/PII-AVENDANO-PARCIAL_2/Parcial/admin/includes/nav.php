@@ -9,14 +9,31 @@
                 <li class="nav-item">
                     <a class="nav-link <?php echo $seccion =="home" ? 'active' : '' ?>" aria-current="page" href="?sec=home">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link <?php echo $seccion =="products" ? 'active' : '' ?>" aria-current="page" href="?sec=products">Productos</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Paneles de control de productos
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo $seccion =="productos" ? 'active' : '' ?>" aria-current="page" href="?sec=productos">Control de productos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo $seccion =="marcas" ? 'active' : '' ?>" aria-current="page" href="?sec=marcas">Control de marcas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo $seccion =="tipos" ? 'active' : '' ?>" aria-current="page" href="?sec=tipos">Control de tipos</a>
+                        </li>
+                    </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link <?php echo $seccion =="us" ? 'active' : '' ?>" aria-current="page" href="?sec=us">Nosotros</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?php echo $seccion =="contact" ? 'active' : '' ?>" aria-current="page" href="?sec=contact">Contacto</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Paneles de control de usuarios
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo $seccion =="productos" ? 'active' : '' ?>" aria-current="page" href="?sec=productos">Control de usuarios</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>
