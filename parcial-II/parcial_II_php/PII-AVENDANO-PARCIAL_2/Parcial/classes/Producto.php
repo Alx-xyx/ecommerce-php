@@ -13,11 +13,11 @@
         private $product_id;
         private $name;
         private $brand; 
-        private $img;
         private $collection;
-        private $descripcion;
-        private $tipos;
         private $tamanios;
+        private $tipos;
+        private $descripcion;
+        private $img;
 
     
         //? De aca para abajo, creacion de funciones que interactuan con el JSON

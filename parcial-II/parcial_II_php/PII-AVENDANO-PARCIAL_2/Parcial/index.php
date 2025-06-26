@@ -1,9 +1,12 @@
 <?php
-    // "Import" de mi JSDN
-    //require_once "./data/products.php";
+    //? Importo mi clase sections para usarlas
+    require_once "classes/Secciones.php";
 
-    //Se declaran las secciones validas para la navegacion del sitio
-    $validSections = ['home', 'products', 'contact', 'us', 'product'];
+    //? Declaro mis secciones validas
+    $validSections = Secciones::validSections();
+
+    //? Llamo a las secciones que deberian de accederse en el menu
+    $menuSections = Secciones::menu_sections();
 
     //Isset para analizar si mi get obtiene la section correspondiente. Si no consigue una seccion valida, la section se convierte en home
     $seccion = isset($_GET['sec']) ? $_GET['sec'] : 'home';
@@ -13,6 +16,15 @@
         $vista = '404';
     } else {
         $vista = $seccion;
+    }
+
+    //? LLamo a las secciones que aparecen para el usuario
+    $secciones = Secciones::sectionsUser();
+    $titleSection = "";
+    foreach($secciones as $value){
+        if ($value -> getVinculo() == $vista) {
+            $titleSection = $value -> getTitle();
+        }
     }
 
     // Bootstrap

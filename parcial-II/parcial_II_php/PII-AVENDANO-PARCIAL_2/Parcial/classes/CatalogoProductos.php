@@ -66,5 +66,40 @@ class CatalogoProductos {
 
         return $stmt->fetchAll();
     }
+
+    public function getProductoPorId(int $id): ?Producto{
+        $conexion = (new Conexion())->getConexion();
+
+        $query = "
+            SELECT
+                p.product_id, 
+                p.name, 
+                m.marca_name AS brand, 
+                c.collection_name AS collection, 
+                GROUP_CONCAT(DISTINCT s.size_name ORDER BY s.size_name SEPARATOR ', ') AS tamanios, 
+                GROUP_CONCAT(DISTINCT t.type_name ORDER BY t.type_name SEPARATOR ', ') AS tipos, 
+                p.descripcion, 
+                p.img
+            FROM productos p 
+            LEFT JOIN marca m ON p.brand_id = m.marca_id 
+            LEFT JOIN collection c ON p.collection_id = c.collection_id 
+            LEFT JOIN product_r_size prs ON p.product_id = prs.product_id 
+            LEFT JOIN size s ON prs.size_id = s.size_id 
+            LEFT JOIN product_r_type prt ON p.product_id = prt.product_id 
+            LEFT JOIN type t ON prt.type_id = t.type_id 
+            WHERE p.product_id = :id 
+            GROUP BY p.product_id
+            LIMIT 1
+        ";
+
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->bindParam(':id', $id, PDO::PARAM_INT);
+        $PDOStatement->setFetchMode(PDO::FETCH_CLASS, Producto::class);
+        $PDOStatement->execute();
+
+        $producto = $PDOStatement->fetch();
+
+        return $producto ?: null;
+    }
 }
 ?>

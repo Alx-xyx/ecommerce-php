@@ -1,45 +1,41 @@
 <?php
-    require_once("../classes/Conexion.php");
-    require_once("includes/functions.php");
-    require_once("../functions/autoload.php");
-    
-    $validSectionsAdmin = ["inicio", "productos", "marcas", "usuarios", "niveles", "provincias",
-     "crear_marca", "editar_marca", "borrar_marca", "borrar_marca_acc", 
-     "crear_producto", "editar_producto", "borrar_producto", "borrar_producto_acc", 
-     "login", "logout" ];
-     
-    $seccion = isset($_GET['sec']) ? $_GET['sec'] : 'inicio';
-    
-    if(!in_array($seccion, $validSectionsAdmin)){
-        $vista = '404';
-        $title_seccion = "Error 404 - Página no encontrada";
+    //? Importo mi clase sections para usarlas
+    require_once "classes/Secciones.php";
 
-    }else{
+    //? Declaro mis secciones validas
+    $validSections = Secciones::validSections();
+
+    //? Llamo a las secciones que deberian de accederse en el menu
+    $menuSections = Secciones::menu_sections();
+
+    //Isset para analizar si mi get obtiene la section correspondiente. Si no consigue una seccion valida, la section se convierte en home
+    $seccion = isset($_GET['sec']) ? $_GET['sec'] : 'home';
+
+    //Analizo si la seccion esta en el array de secciones validas. Si no esta, devuelvo un error 404
+    if (!in_array($seccion, $validSections)) {
+        $vista = '404';
+    } else {
         $vista = $seccion;
-        $title_seccion = ucfirst(strtolower($seccion)) . " - Portal de Administración";
     }
+
+    //? LLamo a las secciones que aparecen para el usuario
+    $secciones = Secciones::sectionsUser();
+    $titleSection = "";
+    foreach($secciones as $value){
+        if ($value -> getVinculo() == $vista) {
+            $titleSection = $value -> getTitle();
+        }
+    }
+
+    $cssBootstrap = '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">';
+    $scriptBootstrap = '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>';
 
     ?>
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">    
-    <title><?= $title_seccion; ?></title>
-</head>
-<body>
     <?php
-        require_once "includes/header.php";
+    include_once "./includes/head.php";
+    include_once "./includes/body.php";
+    include_once "./includes/footer.php"
     ?>
-    <main class="container-fluid">
-    <?php 
-        require_once "views/$vista.php";
-    ?>
-    </main>
-    <?php
-        require_once "includes/footer.php";
-    ?>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
 </html>

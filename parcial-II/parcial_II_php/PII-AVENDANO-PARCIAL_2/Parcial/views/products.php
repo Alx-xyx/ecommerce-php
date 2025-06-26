@@ -27,7 +27,7 @@
                 <a class="nav-link text-success" href="index.php?sec=products&cat=Pens">Lapiceras</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-success" href="index.php?sec=products&cat=Erasers">Gomas de borrar</a>
+                <a class="nav-link text-success" href="index.php?sec=products&cat=Eraser">Gomas de borrar</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-success" href="index.php?sec=products&cat=Pencil">Lapices</a>

@@ -157,7 +157,7 @@
         "type": ["Pencil"],
         "img": "assets/mono-lite-tombow.jpg",
         "collection": "Pencil",
-        "desc": ""
+        "desc": "El Mono Graph Lite combina un diseño liviano con un mecanismo de escritura preciso, ideal para largas sesiones de escritura o dibujo técnico. Su cuerpo ergonómico garantiza comodidad sin sacrificar el estilo."
     },
     {
         "name": "Mono Graph Grip Mechanical Pencil Pale Tone",
@@ -167,7 +167,7 @@
         "type": ["Pencil"],
         "img": "assets/mono-grip-tombow.jpg",
         "collection": "Pencil",
-        "desc": ""
+        "desc": "Este portaminas destaca por su empuñadura antideslizante y sus suaves tonos pastel, ofreciendo precisión y comodidad en cada trazo. Ideal para quienes buscan funcionalidad con un diseño delicado."
     },
     {
         "name": "MONO Graph Mechanical Pencil Clear Version",
@@ -177,7 +177,7 @@
         "type": ["Pencil"],
         "img": "assets/mono-clear-tombow.jpg",
         "collection": "Pencil",
-        "desc": ""
+        "desc": "Con un diseño transparente y moderno, este portaminas permite ver su mecanismo interno, combinando estilo con una escritura precisa y fluida. Una elección ideal para quienes valoran lo funcional y lo estético."
     },
     {
         "name": "MONO Work Mechanical Pencil",
@@ -187,7 +187,7 @@
         "type": ["Pencil"],
         "img": "assets/mono-work-tombow.jpg",
         "collection": "Pencil",
-        "desc": ""
+        "desc": "Diseñado para tareas exigentes, el MONO Work ofrece una escritura robusta y firme gracias a su mina de 1.3 mm, ideal para bocetos técnicos, notas rápidas y uso intensivo en el día a día."
     },
     {
         "name": "MONO graph Mechanical Pencil Mineral Color",
@@ -197,6 +197,6 @@
         "type": ["Pencil"],
         "img": "assets/mono-graph-tombow.jpg",
         "collection": "Pencil",
-        "desc": ""
+        "desc": "Con un diseño elegante y tonos minerales, este portaminas combina estilo y funcionalidad. Su mecanismo de agite y su empuñadura cómoda lo convierten en una excelente opción para escritura prolongada."
     }
 ]
