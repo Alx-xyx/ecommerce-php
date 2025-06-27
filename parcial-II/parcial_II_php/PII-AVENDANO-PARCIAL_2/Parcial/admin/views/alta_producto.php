@@ -24,7 +24,7 @@
 ?>
 
     <h2>Agregado de productos</h2>
-    <form action="actions/create_product_action.php" method="post" enctype="multipart/form-data">
+    <form action="actions/create_product_action.php" method="POST" enctype="multipart/form-data">
 
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre de Producto</label>
@@ -33,6 +33,10 @@
         <div class="mb-3">
             <label for="descripcion" class="form-label">Descripcion</label>
             <input type="text" class="form-control" id="descripcion" name="descripcion">
+        </div>
+            <div class="mb-3">
+            <label for="img" class="form-label">Foto</label>
+            <input class="form-control" type="file" id="img" name="img">
         </div>
         <div class="mb-3">
             <label for="brand" class="form-label">Marca</label>
@@ -61,8 +65,8 @@
         </div>
         <div class="mb-3">
             <label for="size" class="form-label">Tamaños</label>
-            <select class="form-select" aria-label="Default select example" name="size">
-                <option selected>Seleccione un tamaño</option>
+            <select class="form-select" aria-label="Default select example" name="size[]" multiple>
+                <option disabled selected value="">Seleccione un tamaño</option>
                 <?php
                 foreach ($listaTamaños as $size) {
                 ?>
@@ -74,8 +78,8 @@
         </div>
         <div class="mb-3">
             <label for="type" class="form-label">Tipos</label>
-            <select class="form-select" aria-label="Default select example" name="type">
-                <option selected>Seleccione un tipo</option>
+            <select class="form-select" aria-label="Default select example" name="type[]" multiple>
+                <option disabled selected value="">Seleccione un tipo</option>
                 <?php
                 foreach ($listaTipos as $type) {
                 ?>
@@ -88,6 +92,22 @@
         <input type="submit" value="Crear">
         <a href="?sec=productos" class="btn btn-danger">Cancelar</a>
     </form>
+    <script>
+    document.querySelector('form').addEventListener('submit', function (e) {
+        const sizeSelect = document.querySelector('select[name="size[]"]');
+        const typeSelect = document.querySelector('select[name="type[]"]');
+
+        if ([...sizeSelect.selectedOptions].length === 0 || [...typeSelect.selectedOptions].length === 0) {
+            e.preventDefault();
+            Swal.fire({
+                icon: 'warning',
+                title: 'Faltan datos',
+                text: 'Seleccioná al menos un tamaño y un tipo',
+                confirmButtonText: 'Aceptar'
+            });
+        }
+    });
+    </script>
             <!-- <script>
         Swal.fire({
             icon: 'success',

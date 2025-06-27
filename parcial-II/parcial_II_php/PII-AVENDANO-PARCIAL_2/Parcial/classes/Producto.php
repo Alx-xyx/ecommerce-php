@@ -112,20 +112,50 @@
         }
 
         //* Funcion para insertar un nuevo producto en mi BBDD
-        public static function insert( string $name, string $brand, string $collection, string $size, string $type, string $descripcion){
+        public static function insert( string $name, string $brand, string $collection, array $size, array $type, string $descripcion, string $img){
             $conexion = (new Conexion())->getConexion();
             $query = 
-            "INSERT INTO productos (`product_id`, `name`, `brand`, `collection`, `size`, `type`, `descripcion`, `img`)
-            VALUES (:name, :brand, :collection, :size, :type, :descripcion, :img)";
+            //* Cuando hago el insert, los valores dentro de los parentesis deben de corresponder a la nomenclatura de las columnas
+            "INSERT INTO productos (`name`, `brand_id`, `collection_id`, `descripcion`, `img`)
+            VALUES (:name, :brand, :collection, :descripcion, :img)";
             $PDOStatement = $conexion->prepare($query);
             $PDOStatement->execute([
                 'name' => $name,
                 'brand' => $brand,
                 'collection' => $collection,
-                'size' => $size,
-                'type' => $type,
                 'descripcion' => $descripcion,
+                'img' => $img
             ]);
+
+            $product_id = $conexion -> lastInsertId();
+            if (!$product_id) {
+                throw new Exception('No se ha podido obtener el Id del nuevo producto');
+            }
+            
+            if (is_array($size)) {
+                foreach($size as $idSize){
+                    $PDOStatement = $conexion -> prepare(
+                        "INSERT INTO product_r_size (product_id, size_id) 
+                        VALUES (:product_id, :size_id)");
+                        $result = $PDOStatement -> execute([
+                            'product_id' => $product_id,
+                            'size_id' => $idSize
+                        ]);
+                }
+            }
+
+            if (is_array($type)) {
+                foreach($type as $idType){
+                    $PDOStatement = $conexion -> prepare(
+                        "INSERT INTO product_r_type (product_id, type_id) 
+                        VALUES (:product_id, :type_id)");
+                        $result = $PDOStatement -> execute([
+                            'product_id' => $product_id,
+                            'type_id' => $idType
+                        ]);
+                }
+            }
+
         }
     }
 ?>

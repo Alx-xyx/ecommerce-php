@@ -17,7 +17,7 @@ class CatalogoProductos {
                 c.collection_name AS collection,
                 p.descripcion,
                 GROUP_CONCAT(DISTINCT t.type_name ORDER BY t.type_name SEPARATOR ', ') AS tipos,
-                GROUP_CONCAT(DISTINCT s.size_name ORDER BY s.size_name SEPARATOR ', ') AS tamanios
+                GROUP_CONCAT(DISTINCT s.size_name ORDER BY s.size_name SEPARATOR ', ') AS tamaños
             FROM productos p
             LEFT JOIN marca m ON p.brand_id = m.marca_id
             LEFT JOIN collection c ON p.collection_id = c.collection_id
