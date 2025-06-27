@@ -1,5 +1,6 @@
 <?php 
     //! Mi clase producto con todas las propiedades que podria llegar a usar
+
     class Producto {
         // public $id;
         // public $name;
@@ -14,8 +15,8 @@
         private $name;
         private $brand; 
         private $collection;
-        private $tamanios;
-        private $tipos;
+        private $size;
+        private $type;
         private $descripcion;
         private $img;
 
@@ -43,11 +44,11 @@
         }
 
         public function getSize(){
-            return $this -> tamanios;
+            return $this -> size;
         }
 
         public function getType(){
-            return $this -> tipos;
+            return $this -> type;
         }
 
         public function getImg(){
@@ -65,7 +66,7 @@
                         echo '<strong>Colección:</strong> ' . $this->collection . '<br>';
                     }
                     foreach($this as $propiedad => $valor){
-                        if(!in_array($propiedad, ['name', 'img', 'descripcion', 'product_id', 'collection', 'tipos', 'tamanios'])){ // No repetimos nombre ni imagen
+                        if(!in_array($propiedad, ['name', 'img', 'descripcion', 'product_id', 'collection', 'type', 'size'])){ // No repetimos nombre ni imagen
                             echo '<strong>' . ucfirst($propiedad) . ':</strong> ';
                             if (is_array($valor)) {
                                 echo implode(', ', $valor);
@@ -81,7 +82,7 @@
                     echo '</div>'; 
         }
 
-        //* Metodo para traer todos los productos
+        //* Funcion para traer todos los productos
         public function todosProductos(): array {
             $conexion = (new Conexion())->getConexion();
 
@@ -108,6 +109,23 @@
             $PDOStatement->execute();
 
             return $PDOStatement->fetchAll();
+        }
+
+        //* Funcion para insertar un nuevo producto en mi BBDD
+        public static function insert( string $name, string $brand, string $collection, string $size, string $type, string $descripcion){
+            $conexion = (new Conexion())->getConexion();
+            $query = 
+            "INSERT INTO productos (`product_id`, `name`, `brand`, `collection`, `size`, `type`, `descripcion`, `img`)
+            VALUES (:name, :brand, :collection, :size, :type, :descripcion, :img)";
+            $PDOStatement = $conexion->prepare($query);
+            $PDOStatement->execute([
+                'name' => $name,
+                'brand' => $brand,
+                'collection' => $collection,
+                'size' => $size,
+                'type' => $type,
+                'descripcion' => $descripcion,
+            ]);
         }
     }
 ?>

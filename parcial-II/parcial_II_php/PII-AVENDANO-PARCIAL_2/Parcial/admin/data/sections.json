@@ -28,5 +28,11 @@
         "texto": "product",
         "title": "Product",
         "showUser": false
+    },
+    {
+        "vinculo": "alta_producto",
+        "texto": "alta_producto",
+        "title": "Alta de productos",
+        "showUser": false
     }
 ]

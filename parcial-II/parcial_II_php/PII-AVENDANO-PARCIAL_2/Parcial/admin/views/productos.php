@@ -16,7 +16,7 @@
     <th>Collection</th>
     <th>Size</th>
     <th>Type</th>
-    <th>Desc</th>
+    <th>Descipcion</th>
     <th>Img</th>
 </tr>
 </thead>
@@ -45,4 +45,4 @@ foreach ($lista as $producto) {
 </tbody>
 </table>
 
-<a href="?sec=crear_producto" class="btn btn-primary">Crear producto</a>
+<a href="?sec=alta_producto" class="btn btn-primary">Crear producto</a>
