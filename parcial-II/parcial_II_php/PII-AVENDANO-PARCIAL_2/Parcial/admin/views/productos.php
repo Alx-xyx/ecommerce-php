@@ -4,9 +4,24 @@
     $producto = new Producto;
 
     $lista = $producto -> todosProductos();
+
 ?>
 
 <h2>Administración de Productos</h2>
+
+<?php if (isset($_GET['status']) && $_GET['status'] === 'ok'): ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Producto creado con éxito.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php elseif (isset($_GET['status']) && $_GET['status'] === 'error'): ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        Hubo un error al crear el producto.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif; ?>
+
+
 <table class="table table-striped">
 <thead>
 <tr>
@@ -40,6 +55,7 @@ foreach ($lista as $producto) {
         </td>
     </tr>
     <?php
+    
 }
 ?>
 </tbody>

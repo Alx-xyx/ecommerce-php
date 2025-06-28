@@ -18,6 +18,9 @@
                 <li class="nav-item">
                     <a class="nav-link <?php echo $seccion =="contact" ? 'active' : '' ?>" aria-current="page" href="?sec=contact">Contacto</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link <?php echo $seccion =="admin" ? 'active' : '' ?>" aria-current="page" href="admin">Admin</a>
+                </li>
             </ul>
         </div>
     </div>

@@ -40,7 +40,11 @@ try {
     echo "<strong>Archivo:</strong> " . $e->getFile() . "<br>";
     echo "<strong>Línea:</strong> " . $e->getLine() . "<br>";
     echo "<pre><strong>Trace:</strong><br>" . $e->getTraceAsString() . "</pre>";
-    exit; // Cortá la ejecución si hubo error
+        header("Location: ../index.php?sec=productos&status=error");
+    exit;
 }
+
+header("Location: ../index.php?sec=productos&status=ok");
+exit;
 
 ?>

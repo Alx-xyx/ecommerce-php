@@ -34,5 +34,11 @@
         "texto": "alta_producto",
         "title": "Alta de productos",
         "showUser": false
+    },
+    {
+        "vinculo": "create_product_action",
+        "texto": "create_product_action",
+        "title": "Create Product",
+        "showUser": false
     }
 ]

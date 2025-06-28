@@ -28,5 +28,11 @@
         "texto": "product",
         "title": "Product",
         "showUser": false
+    },
+    {
+        "vinculo": "admin",
+        "texto": "admin",
+        "title": "Admin",
+        "showUser": true
     }
 ]

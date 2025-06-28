@@ -25,7 +25,6 @@
 
     <h2>Agregado de productos</h2>
     <form action="actions/create_product_action.php" method="POST" enctype="multipart/form-data">
-
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre de Producto</label>
             <input type="text" class="form-control" id="name" name="name">
@@ -92,22 +91,6 @@
         <input type="submit" value="Crear">
         <a href="?sec=productos" class="btn btn-danger">Cancelar</a>
     </form>
-    <script>
-    document.querySelector('form').addEventListener('submit', function (e) {
-        const sizeSelect = document.querySelector('select[name="size[]"]');
-        const typeSelect = document.querySelector('select[name="type[]"]');
-
-        if ([...sizeSelect.selectedOptions].length === 0 || [...typeSelect.selectedOptions].length === 0) {
-            e.preventDefault();
-            Swal.fire({
-                icon: 'warning',
-                title: 'Faltan datos',
-                text: 'Seleccioná al menos un tamaño y un tipo',
-                confirmButtonText: 'Aceptar'
-            });
-        }
-    });
-    </script>
             <!-- <script>
         Swal.fire({
             icon: 'success',
@@ -116,3 +99,34 @@
             confirmButtonText: 'Aceptar'
         });
         </script> -->
+
+        <!-- 
+        
+        /admin
+            /actions
+                create_product_action.php
+            /classes
+                Autenticacion.php
+                Imagen.php
+                Secciones.php
+            /data
+                sections.json
+            /function
+                autoload.php
+            /includes
+                body.php
+                footer.php
+                header.php
+                head.php
+                nav.php
+            /views
+                404.php
+                alta_producto.php
+                home.php
+                inicio.php
+                marcas.php
+                productos.php
+                tipos.php
+                usuarios.php
+            index.php
+        -->
