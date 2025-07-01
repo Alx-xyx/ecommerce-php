@@ -35,6 +35,9 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link <?php echo $seccion =="home" ? 'active' : '' ?>" aria-current="page" href="../index.php?sec=home">User</a>
+                </li>
             </ul>
         </div>
     </div>

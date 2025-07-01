@@ -111,6 +111,25 @@
             return $PDOStatement->fetchAll();
         }
 
+        //* Funcion para traer un producto mediante ID
+        public static function getProductById(int $id) : ?Producto {
+            $conexion = (new Conexion())->getConexion();
+            $query = "SELECT 
+                        p.product_id, 
+                        p.name, 
+                        p.descripcion, 
+                        p.img, 
+                        m.marca_name AS marca
+                    FROM productos p
+                    INNER JOIN marca m ON p.brand_id = m.marca_id
+                    WHERE p.product_id = :id;";
+            $PDOStatement = $conexion -> prepare($query);
+            $PDOStatement -> setFetchMode(PDO::FETCH_CLASS, self::class);
+            $PDOStatement -> execute(["id" => $id]);
+            $lista = $PDOStatement -> fetch();
+            return !empty($lista) ? $lista : null;
+        }
+
         //* Funcion para insertar un nuevo producto en mi BBDD
         public static function insert( string $name, string $brand, string $collection, array $size, array $type, string $descripcion, string $img){
             $conexion = (new Conexion())->getConexion();
@@ -156,6 +175,57 @@
                 }
             }
 
+        }
+
+        //* Funcion para borrar productos (sumado a sus variantes en las pivots)
+        public static function deleteProduct(int $id): bool{
+            //? Las transacciones en SQL son secuencias que se tratan como
+            //? una sola unidad de trabajo que permiten varias acciones.
+            //? Actuan bajo las propiedades ACID (Atomic, Coherent, Isolated, Durable)
+
+            //* Me conecto como siempre
+            $conexion = (new Conexion()) -> getConexion();
+            $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            //^ Empiezo con un trycatch sumado a la transaccion
+            if ($id <= 0) {
+                throw new Exception(`ID invalido: $id`);
+            }
+            try {
+                var_dump($id);
+                $conexion -> beginTransaction();
+
+                //^ Tengo mis 3 variables las cuales son parecidas al resto del codigo
+                $query = "DELETE FROM product_r_size WHERE product_id = :id";
+                $PDOStatement = $conexion -> prepare($query);
+                $borradoprs = $PDOStatement -> execute(['id' => $id]);
+                if (!$borradoprs) {
+                    throw new Exception('Error al borrar en product_r_size');
+                }
+
+                $query = "DELETE FROM product_r_type WHERE product_id = :id";
+                $PDOStatement = $conexion -> prepare($query);
+                $borradoprt = $PDOStatement -> execute(['id' => $id]);
+                if (!$borradoprt) {
+                    throw new Exception('Error al borrar en product_r_type');
+                }
+
+                $query = "DELETE FROM productos WHERE product_id = :id";
+                $PDOStatement = $conexion -> prepare($query);
+                $borradoproducto = $PDOStatement -> execute(['id' => $id]);
+                if (!$borradoproducto) {
+                    throw new Exception('Error al borrar en producto');
+                }
+
+                //^ Confirmo si esta todo ok con el commit
+                $conexion -> commit();
+                return true;
+
+            } catch (Exception $e) {
+                //! En caso de que algo salga mal, revierto las acciones con rollback
+                $conexion -> rollBack();
+                throw new Exception('Error al borrar un producto:' . $e -> getMessage());
+            };
         }
     }
 ?>

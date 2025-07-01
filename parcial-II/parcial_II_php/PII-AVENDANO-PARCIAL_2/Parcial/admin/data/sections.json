@@ -40,5 +40,11 @@
         "texto": "create_product_action",
         "title": "Create Product",
         "showUser": false
+    },
+    {
+        "vinculo": "borrar_producto",
+        "texto": "borrar_producto",
+        "title": "Borrar producto",
+        "showUser": false
     }
 ]
