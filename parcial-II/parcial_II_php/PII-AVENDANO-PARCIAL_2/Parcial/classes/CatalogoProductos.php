@@ -3,9 +3,22 @@
     require_once 'Conexion.php';
     require_once 'Producto.php';
 
+    /**
+     * Clase CatalogoProductos
+     * 
+     * Se encarga de traer mis productos de la base de datos y mostrarlos en el sitio,
+     * indiferentemente del usuario que lo requiera
+     * 
+     * Permite traer todos los productos, filtrarlos por categoria y traer por ID
+     */
 class CatalogoProductos {
     private $productos = [];
 
+    /**
+     * Permite traer todos los productos de la tabla "productos"
+     * 
+     * @return array ya que son varios productos
+     */
     public function obtenerTodosLosProductos(): array {
         $conexion = (new Conexion())->getConexion();
         $query = 
@@ -36,6 +49,12 @@ class CatalogoProductos {
         return $result;
     }
 
+    /**
+     * Permite filtrar los productos por categoria y traerlos ya filtrados
+     * 
+     * @param string $categoria -> Se provee la categoria por la cual se quiere filtrar
+     * @return array ya que pueden ser varios productos con la misma categoria
+     */
     public function obtenerProductosPorCategoria(string $categoria): array {
         $conexion = (new Conexion())->getConexion();
         // Aquí la tabla productos no tiene la columna 'collection', sino que es 'collection_id'
@@ -67,6 +86,13 @@ class CatalogoProductos {
         return $stmt->fetchAll();
     }
 
+    /**
+     * Obtiene productos mediante un id provisto
+     * 
+     * @param int $id -> Se provee un id para referenciar y buscar
+     * @return Producto|null -> Si se obtiene el producto se devuelve el objeto,
+     * caso contrario se devolvera un null
+     */
     public function getProductoPorId(int $id): ?Producto{
         $conexion = (new Conexion())->getConexion();
 

@@ -1,16 +1,17 @@
 <?php 
+    /**
+     * Clase Producto
+     * 
+     * La clase mas importante del sitio. Se encarga de manejar cada uno de los productos
+     * de manera central, ya que contiene la manera en que se obtiene los datos y como se
+     * manejan en distintos entornos
+     * 
+     * Permite hacer un get total, getByID, renderizar cada card al momento de visualizar
+     * cada producto, insert, delete y edit.
+     */
     //! Mi clase producto con todas las propiedades que podria llegar a usar
 
     class Producto {
-        // public $id;
-        // public $name;
-        // public $brand;
-        // public $size;
-        // public $type;
-        // public $img;
-        // public $categoria;
-        // public $desc;
-
         private $product_id;
         private $name;
         private $brand; 
@@ -21,7 +22,6 @@
         private $img;
         private $brand_id;
 
-    
         //? De aca para abajo, creacion de funciones que interactuan con el JSON
         
         public function getIdProducto() {
@@ -59,7 +59,12 @@
         public function getImg(){
             return $this -> img;
         }
-
+        
+        /**
+         * Renderiza cada card en el include de usuario "includes/productCard.php"
+         * 
+         * @return Void Ya que no retorna nada mas que HTML para ser mostrado
+         */
         //* Funcion para renderizar mis cards de productos
         public function cardRender(){
             echo '<div class="card" style="width: 18rem; display: inline-block; margin: 10px;">';
@@ -87,6 +92,12 @@
                     echo '</div>'; 
         }
 
+        /**
+         * Funcion que retorna todos los productos encontrados en la BBDD
+         * 
+         * @return array ya que retorna la totalidad de productos encontrados
+         * en la tabla "productos"
+         */
         //* Funcion para traer todos los productos
         public function todosProductos(): array {
             $conexion = (new Conexion())->getConexion();
@@ -116,6 +127,13 @@
             return $PDOStatement->fetchAll();
         }
 
+        /**
+         * Retorna un producto especifico mediante la busqueda de su ID
+         * 
+         * @param int $id -> Es el ID del producto al que se hace referencia
+         * @return Producto|null -> Retorna un objeto "Producto" en caso de existir tal,
+         * en caso de que no, retornara null si no encuentra el ID
+         */
         //* Funcion para traer un producto mediante ID
         public static function getProductById(int $id) : ?Producto {
             $conexion = (new Conexion())->getConexion();
@@ -135,6 +153,17 @@
             return !empty($lista) ? $lista : null;
         }
 
+        /**
+         * Inserta en la tabla "productos" un nuevo producto mediante el uso de vistas y actions
+         * 
+         * @param string $name -> Nombre del nuevo producto
+         * @param string $brand -> Nombre de la marca del nuevo producto
+         * @param string $collection -> Nombre de la coleccion del nuevo producto
+         * @param array $size -> Tamaño/s recibido/s del nuevo producto
+         * @param array $type -> Tipo/s recibido/s del nuevo producto
+         * @param string $descripcion -> Descripcion del nuevo producto
+         * @param string $img -> Imagen del nuevo producto
+         */
         //* Funcion para insertar un nuevo producto en mi BBDD
         public static function insert( string $name, string $brand, string $collection, array $size, array $type, string $descripcion, string $img){
             $conexion = (new Conexion())->getConexion();
@@ -179,9 +208,14 @@
                         ]);
                 }
             }
-
         }
 
+        /**
+         * Borra de la tabla productos, product_r_size y product_r_type un producto y su id de las tablas pivots
+         * 
+         * @param int $id -> Id al cual se referencia al momento de querer borrar el producto
+         * @return array en caso de lograr borrar el producto, retorna true, caso contrario false
+         */
         //* Funcion para borrar productos (sumado a sus variantes en las pivots)
         public static function deleteProduct(int $id): bool{
             //? Las transacciones en SQL son secuencias que se tratan como
@@ -233,6 +267,20 @@
             };
         }
 
+        /**
+         * Permite la edicion general de datos de un producto.
+         * 
+         * @param mixed $product_id -> Id del producto a editar
+         * @param mixed $name -> Nombre del producto a editar
+         * @param mixed $brand -> Marca del producto a editar
+         * @param mixed $descripcion -> Descripcion del producto a editar
+         * @param mixed $collection -> Coleccion del producto a editar
+         * @param mixed $size -> Tamaño del producto a editar
+         * @param mixed $type -> Tipo del producto a editar
+         * @param mixed $img -> Imagen del producto a editar
+         * @return void Ya que solo cambia los datos en la base de datos.
+         * El retorno se le cede a otra funcion.
+         */
         //* Funcion para editar productos
         public function editProduct($product_id, $name, $brand, $descripcion, $collection, $size, $type, $img){
         $conexion = (new Conexion())->getConexion();

@@ -1,4 +1,13 @@
 <?php
+    /**
+     * Clase Size
+     * 
+     * Esta encargada de manejar los "Sizes" de mis productos.
+     * Al ser una entidad diferente a productos (pero que forma parte de ella)
+     * el administrador tiene la libertad de aplicar el ABM de esta entidad
+     * 
+     * Permite hacer un get total, insert, getById, edit y delete
+     */
     class Size{
         private $size_id;
         private $size_name;
@@ -10,6 +19,12 @@
         public function getSize(){
             return $this -> size_name;
         }
+
+        /**
+         * Trae todos los tamaños que conforman la tabla de "size"
+         * 
+         * @return array ya que son mas de 1 size
+         */
 
         //* Funcion para obtener todas las colecciones
         public function todosTamaños():array{
