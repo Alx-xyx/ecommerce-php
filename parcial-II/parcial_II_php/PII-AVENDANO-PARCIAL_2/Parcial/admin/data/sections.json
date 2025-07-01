@@ -46,5 +46,11 @@
         "texto": "borrar_producto",
         "title": "Borrar producto",
         "showUser": false
+    },
+    {
+        "vinculo": "editar_producto",
+        "texto": "editar_producto",
+        "title": "editar producto",
+        "showUser": false
     }
 ]

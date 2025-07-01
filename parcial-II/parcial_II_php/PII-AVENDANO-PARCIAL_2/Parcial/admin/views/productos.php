@@ -51,11 +51,6 @@ foreach ($lista as $producto) {
         <td><?= $producto -> getDescripcion();?></td>
         <td>
         <a href="?sec=editar_producto&id=<?= $producto->getIdProducto(); ?>" class="btn btn-warning">Editar</a>
-        <?php
-        // $href = "?sec=borrar_producto&id=" . $producto->getIdProducto();
-        // echo "<pre>$href</pre>"; // Muestra la URL generada
-        ?>
-        <!-- <a href="<?= $href ?>" class="btn btn-danger">Borrar</a>     -->
         <a href="?sec=borrar_producto&id=<?= $producto->getIdProducto(); ?>" class="btn btn-danger">Borrar</a>        
     </td>
     </tr>

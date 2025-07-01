@@ -19,6 +19,7 @@
         private $type;
         private $descripcion;
         private $img;
+        private $brand_id;
 
     
         //? De aca para abajo, creacion de funciones que interactuan con el JSON
@@ -29,6 +30,10 @@
 
         public function getMarca() {
             return $this -> brand;
+        }
+
+        public function getIdMarca(){
+            return $this -> brand_id;
         }
 
         public function getName() {
@@ -226,6 +231,50 @@
                 $conexion -> rollBack();
                 throw new Exception('Error al borrar un producto:' . $e -> getMessage());
             };
+        }
+
+        //* Funcion para editar productos
+        public function editProduct($product_id, $name, $brand, $descripcion, $collection, $size, $type, $img){
+        $conexion = (new Conexion())->getConexion();
+        $query = 
+            "UPDATE productos
+            SET 
+            product_id = :product_id,
+            name = :name,
+            brand = :brand,
+            descripcion = :descripcion,
+            collection = :collection,
+            size = :size,
+            type = :type,
+            img = :img
+            WHERE
+            product_id = :id
+        ";
+        $PDOStatement = $conexion -> prepare($query);
+        $PDOStatement -> execute([
+            "product_id" => $product_id,
+            "name" => $name,
+            "brand" => $brand,
+            "descripcion" => $descripcion,
+            "collection" => $collection,
+            "size" => $size,
+            "type" => $type,
+            "img" => $img,
+        ]);
+        }
+
+        public function editMin($nombre, $id_producto, $id_marca, $foto){
+        $conexion = (new Conexion())->getConexion();
+        $query = "UPDATE productos 
+            SET name = :nombre, brand_id = :id_marca, img = :foto 
+            WHERE product_id = :id";
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->execute([
+        "nombre" => $nombre,
+        "id_marca" => $id_marca,
+        "foto" => $foto,
+        "id" => $id_producto
+                    ]);
         }
     }
 ?>
