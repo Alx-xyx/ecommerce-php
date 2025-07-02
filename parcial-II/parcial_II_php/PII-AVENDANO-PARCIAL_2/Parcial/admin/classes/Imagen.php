@@ -4,7 +4,7 @@
         public static function uploadImage($directorio, $dataArchive):string{
             $oldName = (explode(".", $dataArchive['name']));
             $extention = end($oldName);
-            $newName = time() . $extention;
+            $newName = time() . '.' . $extention;
 
             $uploadArchive = move_uploaded_file($dataArchive['tmp_name'], "$directorio/$newName");
             if (!$uploadArchive) {

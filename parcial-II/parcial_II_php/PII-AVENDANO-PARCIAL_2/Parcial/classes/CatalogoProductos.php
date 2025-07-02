@@ -12,8 +12,6 @@
      * Permite traer todos los productos, filtrarlos por categoria y traer por ID
      */
 class CatalogoProductos {
-    private $productos = [];
-
     /**
      * Permite traer todos los productos de la tabla "productos"
      * 

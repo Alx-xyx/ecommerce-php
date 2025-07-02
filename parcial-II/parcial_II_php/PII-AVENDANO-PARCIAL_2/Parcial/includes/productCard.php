@@ -40,7 +40,7 @@
     if ($producto) {
         echo '<div class="container my-5 d-flex justify-content-center">';
             echo '<div class="card width24">';
-                echo '<img src="' . $producto->getImg() . '" class="card-img-top" alt="' . $producto->getName() . '">';
+                echo '<img src="assets/products/' . $producto->getImg() . '" class="card-img-top" alt="' . $producto->getName() . '">';
                 echo '<div class="card-body">';
                     echo '<h5 class="card-title">' . $producto->getName() . '</h5>';
                     echo '<h6 class="card-subtitle mb-2 text-muted">' . $producto->getMarca() . '</h6>';

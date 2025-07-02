@@ -73,7 +73,7 @@
         //* Funcion para renderizar mis cards de productos
         public function cardRender(){
             echo '<div class="card" style="width: 18rem; display: inline-block; margin: 10px;">';
-                    echo '<img src="' . $this->img . '" class="card-img-top" alt="' . $this->name . '">';
+                    echo '<img src="assets/products/' . $this->img . '" class="card-img-top" alt="' . $this->name . '">';
                     echo '<div class="card-body">';
                     echo '<h5 class="card-title">' . $this->name . '</h5>';
                     echo '<p class="card-text">';
@@ -81,7 +81,7 @@
                         echo '<strong>Colección:</strong> ' . $this->collection . '<br>';
                     }
                     foreach($this as $propiedad => $valor){
-                        if(!in_array($propiedad, ['name', 'img', 'descripcion', 'product_id', 'collection', 'type', 'size'])){ // No repetimos nombre ni imagen
+                        if(!in_array($propiedad, ['name', 'img', 'descripcion', 'product_id', 'collection', 'type', 'size', 'brand_id', 'size_id'])){ // No repetimos nombre ni imagen
                             echo '<strong>' . ucfirst($propiedad) . ':</strong> ';
                             if (is_array($valor)) {
                                 echo implode(', ', $valor);
@@ -173,6 +173,8 @@
          */
         //* Funcion para insertar un nuevo producto en mi BBDD
         public static function insert( string $name, string $brand, string $collection, array $size, array $type, string $descripcion, string $img){
+            var_dump($descripcion);
+            var_dump($img);
             $conexion = (new Conexion())->getConexion();
             $query = 
             //* Cuando hago el insert, los valores dentro de los parentesis deben de corresponder a la nomenclatura de las columnas
