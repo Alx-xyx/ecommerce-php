@@ -39,5 +39,18 @@
 
         return $lista;
         }
+
+            //! Funcion para obtener marcas por ID
+    public static function getSizeById(int $id): ?Size
+    {
+        $conexion = (new Conexion()) -> getConexion();
+        $query = "SELECT * FROM size WHERE size_id = :id";
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+        $PDOStatement->execute(["id" => $id]);
+        $lista = $PDOStatement->fetch();
+
+        return !empty($lista) ? $lista : null;
+    }
     }
 ?>

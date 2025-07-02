@@ -36,7 +36,13 @@
             $postData['producto'],
             $postData['product_id'],
             $postData['marca'],
+            $postData['descripcion'],
             $imagen
+        );
+
+        $producto -> editMinSize(
+            $postData['product_id'],
+            $postData['size']
         );
         header("Location: ../index.php?sec=productos&status=ok");
     } catch (Exception $e) {

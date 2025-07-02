@@ -1,5 +1,4 @@
 <?php
-
     require_once './classes/CatalogoProductos.php';
 
     function colorPorType($type){
@@ -36,6 +35,7 @@
     if ($id) {
     $catalogo = new CatalogoProductos();
     $producto = $catalogo->getProductoPorId($id);
+
 
     if ($producto) {
         echo '<div class="container my-5 d-flex justify-content-center">';
@@ -74,5 +74,5 @@
         echo "<p>ID no especificado</p>";
         echo '<a href="index.php?sec=products" class="btn btn-outline-primary">Volver al listado</a>';
     }
-
+    
 ?>

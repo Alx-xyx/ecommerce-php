@@ -21,6 +21,7 @@
         private $descripcion;
         private $img;
         private $brand_id;
+        private $size_id;
 
         //? De aca para abajo, creacion de funciones que interactuan con el JSON
         
@@ -50,6 +51,10 @@
 
         public function getSize(){
             return $this -> size;
+        }
+
+        public function getIdSize(){
+            return $this -> size_id;
         }
 
         public function getType(){
@@ -137,15 +142,17 @@
         //* Funcion para traer un producto mediante ID
         public static function getProductById(int $id) : ?Producto {
             $conexion = (new Conexion())->getConexion();
-            $query = "SELECT 
+            $query = " SELECT 
                         p.product_id, 
                         p.name, 
                         p.descripcion, 
                         p.img, 
-                        m.marca_name AS marca
+                        m.marca_name AS marca,
+                        prs.size_id
                     FROM productos p
                     INNER JOIN marca m ON p.brand_id = m.marca_id
-                    WHERE p.product_id = :id;";
+                    LEFT JOIN product_r_size prs ON p.product_id = prs.product_id
+                    WHERE p.product_id = :id";
             $PDOStatement = $conexion -> prepare($query);
             $PDOStatement -> setFetchMode(PDO::FETCH_CLASS, self::class);
             $PDOStatement -> execute(["id" => $id]);
@@ -311,18 +318,36 @@
         ]);
         }
 
-        public function editMin($nombre, $id_producto, $id_marca, $foto){
-        $conexion = (new Conexion())->getConexion();
-        $query = "UPDATE productos 
-            SET name = :nombre, brand_id = :id_marca, img = :foto 
-            WHERE product_id = :id";
-        $PDOStatement = $conexion->prepare($query);
-        $PDOStatement->execute([
-        "nombre" => $nombre,
-        "id_marca" => $id_marca,
-        "foto" => $foto,
-        "id" => $id_producto
-                    ]);
+        public function editMin($nombre, $id_producto, $id_marca, $foto, $descripcion){
+            $conexion = (new Conexion())->getConexion();
+            $query = "UPDATE productos 
+                SET name = :nombre, brand_id = :id_marca, img = :foto, descripcion = :descripcion
+                WHERE product_id = :id";
+            $PDOStatement = $conexion->prepare($query);
+            $PDOStatement->execute([
+            "nombre" => $nombre,
+            "id_marca" => $id_marca,
+            "foto" => $foto,
+            "id" => $id_producto,
+            'descripcion' => $descripcion
+            ]);
+        }
+
+        public function editMinSize(int $product_id, int $size_id){
+            $conexion = (new Conexion())->getConexion();
+
+            // Eliminar relaciones previas
+            $deleteQuery = "DELETE FROM product_r_size WHERE product_id = :product_id";
+            $PDOStatement = $conexion->prepare($deleteQuery);
+            $PDOStatement->execute(['product_id' => $product_id]);
+
+            // Insertar nueva relación
+            $insertQuery = "INSERT INTO product_r_size (product_id, size_id) VALUES (:product_id, :size_id)";
+            $PDOStatement = $conexion->prepare($insertQuery);
+            $PDOStatement->execute([
+                'product_id' => $product_id,
+                'size_id' => $size_id
+            ]);
         }
     }
 ?>
